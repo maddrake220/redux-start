@@ -71,3 +71,26 @@ export function getUsersThunk() {
     }
   };
 }
+
+const GET_USERS = "GET_USERS";
+
+// middleware가 자동으로 payload를 통해 type을 변조해서 dispatch 한다.
+// -> 각각에 맞게 액션 타입을 생성해야한다.
+
+export const GET_USERS_PENDING = "GET_USERS_PENDING";
+
+export const GET_USERS_FULFILLED = "GET_USERS_FULFILLED";
+
+export const GET_USERS_REJECTED = "GET_USERS_REJECTED";
+
+export function getUsersPromise() {
+  return {
+    type: GET_USERS,
+    // promise 함수
+    // dispatch와 try catch 할 필요 없음.
+    payload: async () => {
+      const res = await axios.get("https://api.github.com/users");
+      return res.data;
+    },
+  };
+}

@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import { todoApp } from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-
+import promise from "redux-promise-middleware";
 // function middleware1(store) {
 //   // next: 다음 middleware를 지칭
 //   console.log("middleware1", 0);
@@ -31,6 +31,9 @@ import thunk from "redux-thunk";
 //   };
 // }
 // const store = createStore(todoApp, applyMiddleware(middleware1, middleware2));
-const store = createStore(todoApp, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(
+  todoApp,
+  composeWithDevTools(applyMiddleware(thunk, promise))
+);
 
 export default store;
