@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
-import { todoApp } from "./reducers";
+import reducer from "./modules/reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
@@ -30,9 +30,9 @@ import promise from "redux-promise-middleware";
 //     };
 //   };
 // }
-// const store = createStore(todoApp, applyMiddleware(middleware1, middleware2));
+// const store = createStore(reducer, applyMiddleware(middleware1, middleware2));
 const store = createStore(
-  todoApp,
+  reducer,
   composeWithDevTools(applyMiddleware(thunk, promise))
 );
 

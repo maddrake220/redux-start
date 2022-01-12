@@ -1,7 +1,29 @@
-import { ADD_TODO, COMPLETE_TODO } from "../actions";
+// docks-pattern
+// action type definition
+const ADD_TODO = "redux-start/todos/ADD_TODO";
+const COMPLETE_TODO = "redux-start/todos/COMPLETE_TODO";
 
+// action create function
+// {type: ADD_TODO, text: '할일'}
+export function addTodo(text) {
+  return {
+    type: ADD_TODO,
+    text,
+  };
+}
+// { type: COMPLETE_TODO, index: 5 }
+export function completeTodo(index) {
+  return {
+    type: COMPLETE_TODO,
+    index,
+  };
+}
+
+// initialState
 const initialState = [];
-export default function todos(previousState = initialState, action) {
+
+// reducer
+export default function reducer(previousState = initialState, action) {
   // 초기값을 설정해주는 부분
   // if (previousState === undefined) {
   //     return [];
