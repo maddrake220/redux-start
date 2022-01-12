@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
 // action type definition
 
 // github API 호출 시작하는 것을 의미
@@ -111,4 +111,26 @@ export function getUsersPromise() {
       return res.data;
     },
   };
+}
+
+// redux-saga
+const GET_USERS_SAGA_START = "GET_USERS_SAGA_START";
+// 제너레이터 생성함수
+function* getUsersSaga(action) {
+  try {
+    yield put(getUsersStart());
+    yield delay(2000);
+    const res = yield call(axios.get, "https://api.github.com/users");
+    yield put(getUsersSuccess(res.data));
+  } catch (error) {
+    yield put(getUsersFail(error));
+  }
+}
+export function getUsersSagaStart() {
+  return {
+    type: GET_USERS_SAGA_START,
+  };
+}
+export function* usersSaga() {
+  yield takeEvery(GET_USERS_SAGA_START, getUsersSaga);
 }
