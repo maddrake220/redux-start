@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // action type definition
 
 // github API 호출 시작하는 것을 의미
